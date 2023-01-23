@@ -4,7 +4,7 @@
       <router-link :to="'/home'"><li ref="slider">首页</li></router-link>
       <router-link :to="'/stock'"><li ref="slider">股票分析</li></router-link>
       <router-link :to="'/article'"><li ref="slider">精选文章</li></router-link>
-      <router-link :to="'/admin'"><li ref="slider">管理中心</li></router-link>
+      <li ref="slider" @click="gotoAdmin">管理中心</li>
     </ul>
   </div>
 </template>
@@ -22,7 +22,11 @@ export default {
   watch: {},
   created () {},
   mounted () {},
-  methods: {}
+  methods: {
+    gotoAdmin () {
+      this.$router.push('/admin')
+    }
+  }
 }
 </script>
 

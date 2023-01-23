@@ -4,8 +4,8 @@
         <el-avatar :size="45" :src="$store.getters.init"></el-avatar>
       </span>
       <el-dropdown-menu slot="dropdown" v-if="!$store.state.isLogin">
-        <el-dropdown-item @click.native="handleLogin">登录</el-dropdown-item>
-        <el-dropdown-item @click.native="handleSign">注册</el-dropdown-item>
+        <el-dropdown-item @click.native="handleLogin"><router-link to="/home">登录</router-link></el-dropdown-item>
+        <el-dropdown-item @click.native="handleSign"><router-link to="/home">注册</router-link></el-dropdown-item>
       </el-dropdown-menu>
       <el-dropdown-menu slot="dropdown" v-if="$store.state.isLogin">
         <el-dropdown-item icon="el-icon-user">个人空间</el-dropdown-item>

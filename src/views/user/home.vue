@@ -56,10 +56,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-  /deep/ .login {
-    top: calc(50% - 215px);
-    right: calc(50% - 215px);
-  }
+
   .el-carousel__item h3 {
     color: #475669;
     font-size: 18px;
