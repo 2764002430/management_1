@@ -1,12 +1,16 @@
 <template>
   <div class="stock">
+    <stockChart></stockChart>
   </div>
 </template>
 
 <script>
+import stockChart from '@/components/stock/stockChart.vue'
 export default {
   name: 'stock',
-  components: {},
+  components: {
+    stockChart
+  },
   props: {},
   data () {
     return {

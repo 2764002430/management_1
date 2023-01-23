@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import admin from '../views/admin/admin.vue'
 import index from '../views/index.vue'
 import home from '../views/user/home.vue'
-import stock from '../views/user/stock.vue'
+import stockPage from '../views/user/stockPage.vue'
 import Article from '@/views/user/article.vue'
 import account from '../views/admin/account.vue'
 import setting from '../views/admin/setting.vue'
@@ -43,7 +43,7 @@ const routes = [
       },
       {
         path: 'stock',
-        component: stock
+        component: stockPage
       }
     ]
   }
