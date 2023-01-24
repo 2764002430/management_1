@@ -4,13 +4,13 @@
       <h2>股票查询</h2>
       <el-input
       placeholder="请输入股票代号"
-      v-model="input" style="width:400px" @keyup.enter.native="handleSearch">
+      v-model="input" style="width:400px" @keyup.enter.native="handleSearch(1)">
         <i slot="prefix" class="el-input__icon el-icon-search"></i>
       </el-input>
     </div>
     <div class="stock-content">
       <div id="dateSelect">
-        <el-select v-model="value" placeholder="请选择">
+        <el-select v-model="value">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -18,6 +18,18 @@
             :value="item.value">
           </el-option>
         </el-select>
+        <el-popover
+          placement="right"
+          width="400"
+          trigger="click">
+          <div class="tooltip">
+            <span v-for="item in Company" :key="item.id">
+            {{ item.id }} - {{ item.value }}
+            <br>
+          </span>
+          </div>
+          <el-button slot="reference">公司详情</el-button>
+        </el-popover>
       </div>
       <stockChart :items="items"></stockChart>
     </div>
@@ -51,7 +63,37 @@ export default {
         value: '20200101',
         label: '2020'
       }],
-      value: ''
+      Company: [
+        {
+          id: '股票代码',
+          value: ''
+        },
+        {
+          id: '交易所代码',
+          value: ''
+        },
+        {
+          id: '法人代表',
+          value: ''
+        },
+        {
+          id: '总经理',
+          value: ''
+        },
+        {
+          id: '注册资本',
+          value: 0
+        },
+        {
+          id: '注册日期',
+          value: ''
+        },
+        {
+          id: '城市',
+          value: ''
+        }
+      ],
+      value: '20230101'
     }
   },
   computed: {
@@ -61,7 +103,14 @@ export default {
       return this.value === '20230101' ? this.formatDate : x
     }
   },
-  watch: {},
+  watch: {
+    value: function (newVal) { // 监听
+      if (this.items.length <= 0) {
+        return
+      }
+      return this.handleSearch()
+    }
+  },
   created () {},
   mounted () {},
   methods: {
@@ -74,7 +123,10 @@ export default {
       d = d < 10 ? ('0' + d) : d
       return y + m + d
     },
-    handleSearch () {
+    handleSearch (first) {
+      if (this.input.trim().length <= 0) {
+        return
+      }
       const params = {
         ts_code: this.input,
         start_date: this.value,
@@ -86,6 +138,38 @@ export default {
         const res = data.data.data
         console.log(res.items)
         this.items = res.items
+        if (first === 1) {
+          if (res.items.length <= 0) {
+            this.$message({
+              showClose: true,
+              message: '未找到有关股票代码',
+              type: 'error',
+              duration: 1000
+            })
+          } else {
+            this.$message({
+              showClose: true,
+              message: '搜索成功',
+              type: 'success',
+              duration: 1000
+            })
+          }
+        }
+      })
+      getstock('stock_company', { ts_code: this.input }, 'ts_code,exchange,chairman,manager,reg_capital,setup_date,province').then(data => {
+        const res = data.data.data
+        console.log(res.items)
+        // const obj = this.Company
+        // let i = 0
+        // for (const key in obj) {
+        //   obj[key] = res.items[0][i]
+        //   i++
+        // }
+        this.Company.map((item, i) => {
+          item.value = res.items[0][i]
+          return item
+        })
+        console.log(this.Company[0].id)
       })
     }
   }

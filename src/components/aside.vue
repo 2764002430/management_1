@@ -23,7 +23,7 @@
         <i class="el-icon-setting"></i>
         <span slot="title">配置管理</span>
       </el-menu-item>
-      <el-menu-item index="/admin/developing">
+      <el-menu-item index="/admin/devtxt">
         <i class="el-icon-menu"></i>
         <span slot="title">开发文档</span>
       </el-menu-item>

@@ -4,6 +4,34 @@
   </div>
 </template>
 
+<script>
+import { mapMutations, mapGetters } from 'vuex'
+export default {
+  name: '',
+  components: {},
+  props: {},
+  data () {
+    return {
+    }
+  },
+  computed: {
+    ...mapGetters(['getUser'])
+  },
+  watch: {},
+  created () {},
+  mounted () {
+    console.log('1', this.getUser)
+    if (this.getUser.username !== '') {
+      this.updateLogin(Boolean(localStorage.getItem('login')))
+      this.updateUser(JSON.parse(localStorage.getItem('userid')))
+    }
+  },
+  methods: {
+    ...mapMutations(['updateLogin', 'updateUser'])
+  }
+}
+</script>
+
 <style lang="less">
 @import '@/assets/css/default.css';
 #app {

@@ -81,7 +81,7 @@ export default {
           this.Logging().then(res => {
             // this.$store.commit('updateUser', this.$store.getters.init(res.user))
             switch (res.code) {
-              case '200': {
+              case '200': { // 成功登录
                 this.$store.commit('updateUser', res.user)
                 this.$store.commit('updateLogin', res.isLogin)
                 console.log(this.$store.state.user)
@@ -89,7 +89,7 @@ export default {
                 this.openSuccess() // 提示
                 break
               }
-              default: this.openError()
+              default: this.openError() // 登录失败
             }
           })
         } else {

@@ -7,6 +7,7 @@ import stockPage from '../views/user/stockPage.vue'
 import Article from '@/views/user/article.vue'
 import account from '../views/admin/account.vue'
 import setting from '../views/admin/setting.vue'
+import developing from '../views/admin/developing'
 import store from '../store/store'
 import { Message } from 'element-ui'
 
@@ -25,6 +26,10 @@ const routes = [
       {
         path: 'root-setting',
         component: setting
+      },
+      {
+        path: 'devtxt',
+        component: developing
       }
     ]
   }, {
